@@ -1,0 +1,18 @@
+[toolchain]
+
+[features]
+seeds = false
+skip-lint = false
+
+[programs.localnet]
+todo_list_app = "4fY5Hsxy7FoY16uJYVi6KybEiXSQ4H3V2ShnSWWWJ9tF"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "Localnet"
+wallet = "/home/fourb/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
