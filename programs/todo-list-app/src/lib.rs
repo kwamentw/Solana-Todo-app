@@ -20,6 +20,16 @@ pub mod todo_list_app {
         task.text=text;
         Ok(())
     }
+
+    pub fn updating_task(ctx: Context<UpdatingTask>, is_done:bool)->Result<()>{
+        let task = &mut ctx.accounts.task;
+        let author = &ctx.accounts.author;
+        let clock =Clock::get().unwrap();// getting current timestamp
+        task.author=*author.key;
+        task.is_done=is_done;
+        task.updated_at=clock.unix_timestamp;
+        ok(())
+    }
 }
 
 #[derive(Accounts)]
@@ -29,6 +39,13 @@ pub struct AddingTask<'info> {
     #[account(mut)]
     pub author: Signer<'info>,
     pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+pub struct UpdatingTask<'info>{
+    #[account(mut, has_one=author)]
+    pub task: Account<'info, Task>,
+    pub author: Signer<'info>,
 }
 
 #[account]

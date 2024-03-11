@@ -7,7 +7,9 @@ describe("todo-list-app", () => {
   // Configure the client to use the local cluster.
   anchor.setProvider(anchor.AnchorProvider.env());
 
+  // initializing the todolist app for test
   const program = anchor.workspace.TodoListApp as Program<TodoListApp>;
+  // setting the auhtor
   const author = program.provider as anchor.AnchorProvider;
 
   it("can create a task", async () => {
